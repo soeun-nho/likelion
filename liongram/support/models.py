@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class Faq(models.Model):
+    #선택지 제공 - 유효성
     CATEGORY_CHOICES = [
         ('1', '일반'),
         ('2', '계정'),
@@ -17,7 +18,7 @@ class Faq(models.Model):
 
     created_at = models.DateTimeField(verbose_name='생성 일시', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='최종 수정 일시', auto_now=True)
-    created_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='faq_created_by')
+    created_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='faq_created_by')# 일관성 위해 무조건 작성
     updated_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='faq_updated_by')
 
 
@@ -48,6 +49,7 @@ class Answer(models.Model):
     created_at = models.DateTimeField(verbose_name='생성 일시', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='최종 수정 일시', auto_now=True)
 
+#기록 남기기
     inquiry = models.ForeignKey(to='Inquiry', on_delete=models.CASCADE)
     created_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='answer_created_by')
     updated_by = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='answer_updated_by')
